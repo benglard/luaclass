@@ -5,22 +5,37 @@ local metamethods = {
    '__call', '__gc', '__newindex', '__mode'
 }
 
+local function rget(t, key)
+   if t == nil then return nil end
+   local rv = t[key]
+   if rv == nil then return rget(t._parent, key)
+   else return rv end
+end
+
 local construct = function(t)
    local rv = {}
    for key, method in pairs(metamethods) do
-      rv[method] = t[method]
+      rv[method] = rget(t, method)
    end
    return rv
 end
 
-Class = function(def)
+Class = function(def, parent)
+   local def = def or {}
+   local subclass = parent ~= nil
+   local parent = parent or {}
+   def.__init__ = def.__init__ or parent.__init__ or function(self) end
+
    setmetatable(def, {
       __call = function(cls, ...)
          local rv = {}
-         for key, val in pairs(cls) do
-            rv[key] = val
+         if subclass then
+            rv._parent = parent(...)
          end
-         setmetatable(rv, construct(def))
+         for key, val in pairs(cls) do
+           rv[key] = val
+         end
+         setmetatable(rv, construct(rv))
          def.__init__(rv, ...)
          return rv
       end,

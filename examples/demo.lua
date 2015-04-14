@@ -53,7 +53,7 @@ print(ct3_1, ct3_2)
 
 print('4 ------')
 
-local Test4 = Class({})
+local Test4 = Class{}
 print(Test4)
 Test4.test = 5
 Test4.f = function(self, ...)
@@ -61,3 +61,8 @@ Test4.f = function(self, ...)
 end
 print(Test4)
 print(Test4:f(1,2,3))
+
+print('5 ------')
+
+local Test5 = Class()
+print(Test5)

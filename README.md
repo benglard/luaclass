@@ -18,20 +18,18 @@ return Class
 with [torch/class](https://github.com/torch/class) it looks something like this:
 
 ```lua
-local B = class('B', 'A')
+local A = class('A')
 
-function B:__init(stuff)
-   A.__init(self, stuff) -- call the parent init
+function A:__init(stuff)
+  self.stuff = stuff
 end
 
-function B:run5()
-   for i=1,5 do
-      print(self.stuff)
-   end
+function A:run()
+  print(self.stuff)
 end
 ```
 
-with luaclass, it looks something like this:
+with luaclass it looks something like this:
 
 ```lua
 local Test = Class({
@@ -50,4 +48,55 @@ local c = Test(1,2,3)
 c:test()
 ```
 
-I like the style of the last way :). Thoughts, feedback, and contributions are all welcome.
+I like the style of the last way :) - I think it's because of the table-based format.
+
+## Subclasses
+
+with [torch/class](https://github.com/torch/class) it looks something like this:
+
+```lua
+local B = class('B', 'A')
+
+function B:__init(stuff)
+   A.__init(self, stuff) -- call the parent init
+end
+
+function B:run5()
+   for i=1,5 do
+      print(self.stuff)
+   end
+end
+```
+
+with luaclass it looks something like this:
+
+```lua
+local Thing = Class
+{
+   name = '',
+
+   __init__ = function(self, name)
+      self.name = name
+   end,
+
+   __tostring = function(self)
+      return tostring(self.name)
+   end
+}
+
+local Person = Class({
+   talk = function(self)
+      print(string.format('Hello, my name is %s', self.name))
+   end
+}, Thing)
+
+local t = Thing('one')
+local p = Person('A')
+
+print(t)
+print(p)
+p:talk()
+print(pcall(t.talk, t))
+```
+
+Thoughts, feedback, and contributions are all welcome.

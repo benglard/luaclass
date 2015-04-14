@@ -80,7 +80,7 @@ print(s1)
 print(s1:is_empty())
 s1:pop()
 print(s1.stack)
-print(s1[3], s1.stack[100])
+print(s1[3], s1[100])
 
 local s2 = Stack()
 s2:push(6)
