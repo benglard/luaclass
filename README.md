@@ -48,7 +48,7 @@ local c = Test(1,2,3)
 c:test()
 ```
 
-I like the style of the last way :) - I think it's because of the table-based format.
+I like the style of the last way :) (because of the table-based format).
 
 ## Subclasses
 

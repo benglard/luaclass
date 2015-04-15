@@ -2,8 +2,8 @@
 
 require '../luaclass'
 
-local Stack = Class({
-
+local Stack = Class
+{
    __init__ = function(self, p1, p2, p3)
       self.stack = {}
    end,
@@ -71,8 +71,7 @@ local Stack = Class({
    --[[__tostring = function(self)
       return 'Hi'
    end]]--
-
-})
+}
 
 local s1 = Stack()
 for i = 1, 5 do s1:push(i) end
