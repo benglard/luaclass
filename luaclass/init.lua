@@ -43,7 +43,7 @@ Class = function(def, parent)
    return def
 end
 
--- Simply coroutine usage, especially for use with classes
+-- Simplify coroutine usage, especially for use with classes
 
 yield = function(...)
    local arg = {...}
