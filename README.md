@@ -32,7 +32,7 @@ end
 with luaclass it looks something like this:
 
 ```lua
-local Test = Class({
+local Test = Class {
    var = 5,
 
    __init__ = function(self, p1, p2, p3)
@@ -42,7 +42,7 @@ local Test = Class({
    test = function(self)
       print(self.var, self.stuff)
    end
-})
+}
 
 local c = Test(1,2,3)
 c:test()
@@ -71,8 +71,7 @@ end
 with luaclass it looks something like this:
 
 ```lua
-local Thing = Class
-{
+local Thing = Class {
    name = '',
 
    __init__ = function(self, name)

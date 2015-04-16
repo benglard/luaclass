@@ -42,3 +42,20 @@ Class = function(def, parent)
    })
    return def
 end
+
+-- Simply coroutine usage, especially for use with classes
+
+yield = function(...)
+   local arg = {...}
+   if #arg == 1 then coroutine.yield(...)
+   else coroutine.yield(arg)
+   end
+end
+ 
+Generator = function(f)  
+   local cor = coroutine.create(f)
+   return function(...)
+      local status, val = coroutine.resume(cor, ...)
+      return val
+   end
+end
